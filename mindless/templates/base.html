@@ -1,0 +1,48 @@
+{% extends 'bootstrap.html' %}
+
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+{% block bootstrap4_before_content %}
+    <header>
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+            <span class="navbar-brand"><img src="{% static 'hci/img/mindless-logo.svg' %}" class="brand-logo"></span>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <div class="mr-auto"></div>
+                {% if ppnt %}
+                    {% if stage %}
+                        <span class="navbar-text mr-4">Stage {{ stage_disp }} / 3</span>
+                    {% endif %}
+                    <span class="navbar-text">{{ ppnt }}</span>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
+{% block bootstrap4_content %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-1">
+                {% block page_icon %}{% endblock %}
+            </div>
+            <div class="col-11">
+                <h1 class="mt-4">{% block title %}(no title){% endblock %}</h1>
+                <h5 class="text-muted mb-4">{% block subtitle %}(no subtitle){% endblock %}</h5>
+            </div>
+
+        </div>
+
+        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+        {% block content %}(no content){% endblock %}
+    </main>
+
+
+{% endblock %}
+
+{% block bootstrap4_after_content %}
+    <footer class="footer">
+        <div class="container"><span class="text-muted">Made with &hearts; in Auckland, New Zealand by the Mindless team.</span></div>
+    </footer>
+{% endblock %}

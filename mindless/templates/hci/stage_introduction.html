@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% load hci_extras %}
+
+{% block title %}
+    {% if ppnt.is_control %}
+        Stage {{ stage_disp }}
+    {% else %}
+        {% stage_title %}
+    {% endif %}
+{% endblock %}
+{% block subtitle %}Introduction{% endblock %}
+
+{% block content %}
+    {% if ppnt.is_control %}
+        <p>Before undergoing tasks to test your multitasking ability, we ask that you wait for 5 minutes to ensure that
+            no undesirable bias affects this study's results. During this time, we ask that you do what you normally
+            would in your free time.</p>
+        <div id="countdown" class="my-4"></div>
+    {% else %}
+        <p>{{ stage.description }}</p>
+    {% endif %}
+
+    <p class="continue {% if ppnt.is_control %}d-none{% endif %}">When you're ready to begin, click <em>
+        {% if ppnt.is_control %}Continue{% else %}Done With App{% endif %}</em>.
+    </p>
+    <a class="btn btn-primary continue {% if ppnt.is_control %}disabled{% endif %}"
+       href="{% url 'stage-task' ppnt.participant_id stage_disp %}">
+        {% if ppnt.is_control %}Continue{% else %}Done With App{% endif %}</a>
+
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/phone.svg' %}">{% endblock %}
+
+{% if ppnt.is_control %}
+    {% block bootstrap4_extra_script %}
+        <script src="{% static 'hci/js/jquery.progressBarTimer.min.js' %}"></script>
+        <script type="application/javascript">
+            $("#countdown").progressBarTimer({
+                timeLimit: 300,
+                warningThreshold: 5,
+                autostart: true,
+                onFinish: function () {
+                    $('.continue').removeClass('d-none').removeClass('disabled');
+                }
+            }).start()
+        </script>
+    {% endblock %}
+{% endif %}

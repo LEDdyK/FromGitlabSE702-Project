@@ -1,0 +1,9 @@
+mindless/venv/
+**/.idea/
+mindless/**/__pycache__/
+mindless/*.sqlite3
+mindless/node_modules/
+mindless/mindless/settings/prod.py
+mindless/static/
+mindless/.prod
+

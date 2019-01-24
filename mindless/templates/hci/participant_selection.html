@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+{% block title %}Participant Selection{% endblock %}
+{% block subtitle %}Mindfulness Study Evaluation{% endblock %}
+
+{% block content %}
+    {% for ppnt in pending_ppnts %}
+        <a class="btn btn-primary"
+           href="{{ ppnt.get_next_link }}">{{ ppnt }}</a>
+    {% endfor %}
+
+    {% if finished_ppnts %}
+        <h5 class="mt-4">Finished Participants</h5>
+        {% for ppnt in finished_ppnts %}
+            <button class="btn btn-default" disabled>{{ ppnt }}</button>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/select-user.svg' %}">{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+{% block title %}Welcome, {{ ppnt }}{% endblock %}
+{% block subtitle %}Mindfulness Study Evaluation{% endblock %}
+
+{% block content %}
+    <p>In this study, you will be asked to make use of a mindfulness app for a short period of time. Following this, we
+        will ask you to play a mini-game.</p>
+    <p>This study is broken down into three stages. You will be asked to take a short break between each
+        stage.</p>
+    {% if not ppnt.is_control %}
+        <ul class="list-group">
+            {% for stg_num, stage in stages %}
+                <li class="list-group-item">Stage {{ stg_num }} ({{ stage.name }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p class="mt-4">When you're ready to begin, click <em>Continue</em>.</p>
+    <a class="btn btn-primary" href="{% url 'study-survey' ppnt.participant_id %}">Continue</a>
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/study.svg' %}">{% endblock %}

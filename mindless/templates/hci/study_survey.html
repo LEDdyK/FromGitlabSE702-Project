@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+{% block title %}Before We Begin{% endblock %}
+{% block subtitle %}Pre-Study Survey{% endblock %}
+
+{% block content %}
+    {#    {{ form.errors }}#}
+    <form method="post" id="form-study-survey">
+        {% csrf_token %}
+        <input type="hidden" name="participant_id" value="{{ ppnt.participant_id }}">
+        {% bootstrap_form form %}
+        {% bootstrap_button 'Submit Survey' button_type='submit' button_class='btn-primary' %}
+    </form>
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/survey.svg' %}">{% endblock %}
+
+{% block bootstrap4_extra_script %}
+    <script type="application/javascript">
+        const custom_gender_group = $('#id_custom_gender').parent();
+        custom_gender_group.hide();
+        $('input[type=radio][name="gender"]').change(function () {
+            if (this.value === 'custom') {
+                custom_gender_group.show();
+            } else {
+                custom_gender_group.hide();
+            }
+        });
+
+        const meditation_tech_group = $('#id_meditation_tech_0').parent().parent().parent();
+        meditation_tech_group.hide();
+        $('input[type=radio][name="meditation"]').change(function () {
+            if (this.value !== 'none') {
+                meditation_tech_group.show();
+            } else {
+                meditation_tech_group.hide();
+            }
+        });
+    </script>
+{% endblock %}

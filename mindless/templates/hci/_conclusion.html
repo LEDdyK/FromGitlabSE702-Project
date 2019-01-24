@@ -1,0 +1,38 @@
+<div class="mt-2 mb-2">
+    <canvas id="cloud-canvas" width="640" height="480">Your browser doesn't support canvas elements, and can't
+        show this pretty picture.
+    </canvas>
+</div>
+{% if all_done %}
+    <p><b>Please do not close this window.</b></p>
+{% else %}
+    <p>Click <em>Next Stage</em> to continue.</p>
+    <a href="{{ next_link }}" class="btn btn-primary">Next Stage</a>
+{% endif %}
+<div class="text-muted mt-5">
+
+    <ul>
+        <li>
+            <small>
+                <a href="http://opengameart.org/content/fluffy-clouds">Fluffy Clouds</a> by <a
+                    href="http://daniel.benoy.name/">Daniel Gregory Benoy</a> under <a
+                    href="http://www.gnu.org/licenses/gpl-2.0.html">GNU GPL 2.0</a>/<a
+                    href="http://www.gnu.org/licenses/gpl-3.0.html">GNU GPL 3.0</a>/<a
+                    href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a> license.
+            </small>
+        </li>
+        <li>
+            <small>
+                Background tiles by <a href="http://silveiraneto.net">silveira neto</a>. See the <a
+                    href="https://github.com/silveira/openpixels">Open Pixels project</a>. <a
+                    href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a> license.
+            </small>
+        </li>
+        <li>
+            <small>Code by <a href="http://silveiraneto.net">silveira neto</a> under <a
+                    href="http://www.gnu.org/licenses/gpl-3.0.html">GNU GPL 3.0</a> or <a
+                    href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a> license.
+            </small>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load humanize %}
+{% load staticfiles %}
+
+{% block title %}Study Conclusion{% endblock %}
+{% block subtitle %}Study Complete!{% endblock %}
+
+{% block content %}
+    <p>Thank you for your participation in this study. You have now completed all stages, and you are
+        finished! We appreciate your time.</p>
+    {% include 'hci/_conclusion.html' with all_done=True %}
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+    <script src="{% static 'hci/js/forest.js' %}"></script>
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/finish-flag.svg' %}">{% endblock %}

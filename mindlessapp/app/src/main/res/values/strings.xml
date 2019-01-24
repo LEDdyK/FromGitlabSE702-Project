@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Mindfulness</string>
+    <string name="fragment0_text">mindfulness is a state of the mind in which thoughts are
+        reduced to the present moment. these thoughts focuses on one\'s presence with the
+        environment, their bodily sensations, and their interactions between</string>
+    <string name="fragment1_text">academic studies provide evidence supporting the notion that
+        mindfulness meditation provides benefits that contributes to one\'s well being including
+        their psychological health. such benefits include:</string>
+    <string name="fragment1_list">
+        <li>\treduced stress</li>\n
+        <li>reduced anxiety</li>
+    </string>
+    <string name="fragment1_text2">academic studies also provide evidence supporting the notion
+        that mindfulness meditation can contribute to one\'s productivity which include the
+        following:</string>
+    <string name="fragment1_list2">
+        <li>\ttask endurance</li>\n
+        <li>cognitivity</li>\n
+        <li>memory capacity</li>\n
+        <li>executive functioning</li>
+    </string>
+    <string name="fragment2_text">\n
+        1. you will be expected to interact with your screen\n\n
+        2. be aware of your interactions. you will get visual and auditory feedback depending on
+        your performance\n\n
+        3. maintain a mindful state. keep your thoughts limited to the present moment, thinking
+        one thought at a time
+    </string>
+    <string name="instruction_text">
+        draw a circle \nand notice the changes
+    </string>
+    <string name="exit_text">
+        thank you for taking your time to use this application. press next to return to the
+        definition screen
+    </string>string>
+</resources>

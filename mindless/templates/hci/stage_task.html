@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% load hci_extras %}
+
+{% block title %}
+    {% if is_practice %}
+        Before We Begin
+    {% else %}
+        {% if ppnt.is_control %}
+            Stage {{ stage_disp }}
+        {% else %}
+            {% stage_title %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block subtitle %}Task
+    {% if is_practice %}
+        <span class="badge badge-info">Practice</span>
+    {% else %}
+        <span class="badge badge-warning">Recorded</span>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if is_practice %}
+        <div class="card">
+            <div class="card-body">
+                <p>A task consists of two games: <em>Clicker</em> and <em>Filler</em>, which are explained below. These
+                    games will test the effect of mindfulness apps on your ability to multitask.
+                    This practice round is <b>not recorded</b>, and is shorter than the (following)
+                    recorded
+                    task.</p>
+                <p>These
+                    games have <b>no time limit</b>, and you may work on either game at any time. A game will become
+                    brighter when
+                    your cursor is over the game window, and will become slightly transparent when your cursor leaves
+                    the
+                    game window.</p>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+
+                <div class="card">
+                    <div class="card-body"><h5><img class="task-type-icon"
+                                                    src="{% static 'hci/img/fill.svg' %}"> Filler</h5>
+                        <p>In this exercise, you are to drag shapes on
+                            the
+                            left to
+                            exactly fill the map on the right.</p>
+                        <p>Screens are completed by filling the map with all available shapes. If a shape does
+                            not belong where
+                            you drag it onto the map, it will nudge itself to appear misaligned with the map, indicating
+                            that the
+                            shape has been improperly placed.</p></div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><img class="task-type-icon" src="{% static 'hci/img/click.svg' %}">
+                            Clicker
+                        </h5>
+                        <p>In this exercise, you are to click the
+                            appropriate shape depending on the guide shown at the top of the clicker window. The left
+                            guide
+                            shows
+                            what to click with the <em>left</em> mouse button, while the right guide indicates that of
+                            the
+                            <em>right</em> mouse button.</p>
+                        <p>If both a square and a circle are shown for one mouse button, you are to click any shape of
+                            <em>that
+                                guide's colour</em>. Alternatively, if <em>one shape</em> is shown in each guide, you
+                            are to
+                            click only
+                            the guide's shape with the corresponding mouse button, but can click shapes of any colour.
+                        </p>
+                        <p>Screens are completed by correctly clicking all shapes such that none are
+                            left.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row mt-2">
+        <div class="col-6">
+            <canvas width="512" height="480" id="filler" class="game-canvas"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas width="512" height="480" id="clicker" class="game-canvas"></canvas>
+        </div>
+    </div>
+
+    <form method="POST" id="stage-task-form">
+        <input id="clicker-data" name="clicker-data" type="hidden">
+        <input id="filler-data" name="filler-data" type="hidden">
+        {% if is_practice %}
+            <input id="is-practice" name="is-practice" value="true" type="hidden">
+        {% endif %}
+        {% csrf_token %}
+        <button type="submit" class="mt-4 btn btn-primary" id="task-submit" disabled>Complete {% if is_practice %}
+            Practice {% endif %}Task
+        </button>
+        <p id="task-submit-text" class="text-muted">
+            <small>You cannot complete this task until both exercises have been finished.</small>
+        </p>
+    </form>
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+    <script type="module" src="{% static 'hci/js/easing.js' %}"></script>
+    <script type="module" src="{% static 'hci/js/clicker.js' %}"></script>
+    <script src="{% static 'hci/js/filler.js' %}"></script>
+    <script type="application/javascript">
+        $('#clicker-data, #filler-data').change(() => {
+            if ($('#clicker-data').val().length && $('#filler-data').val().length) {
+                $('#task-submit').attr('disabled', false);
+                $('#task-submit-text').hide();
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/game.svg' %}">{% endblock %}

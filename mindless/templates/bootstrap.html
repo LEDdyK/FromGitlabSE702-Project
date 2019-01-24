@@ -1,0 +1,7 @@
+{% extends 'bootstrap4/bootstrap4.html' %}
+{% load staticfiles %}
+
+{% block bootstrap4_extra_head %}
+    <link rel="stylesheet" href="{% static 'hci/css/hci.css' %}">
+    <title>{% block title %}Welcome{% endblock %} &bullet; Mindless</title>
+{% endblock %}

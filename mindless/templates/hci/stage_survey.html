@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% load hci_extras %}
+
+{% block title %}{% stage_title %}{% endblock %}
+{% block subtitle %}Survey{% endblock %}
+
+{% block content %}
+    <p>You will now be presented with statements shown below. For each statement, choose the option which you believe
+        most accurately represents your experience in this stage. This will give us a useful indication of the
+        effectiveness of the mindfulness apps used.</p>
+
+    <form method="post" id="survey-form">
+        {% csrf_token %}
+        {% for question in all_questions %}
+            <h5>Statement {{ question.identifier }}</h5>
+            <p>{{ question.question }}</p>
+            <div class="mb-4">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                {% for answer in answers %}
+                    <label class="btn btn-light">
+                        <input type="radio" name="qtn-{{ question.identifier }}" value="{{ answer.value }}" autocomplete="off"> {{ answer.label }}
+                    </label>
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" disabled>Submit</button>
+    </form>
+
+{% endblock %}
+
+{% block bootstrap4_extra_script %}
+<script>
+$('#survey-form input[type=radio]').change(() => {
+    let isFormValid = true;
+    $('#survey-form .btn-group').each((i, g) => {
+        if (!$(g).find('input:checked').length) {
+            isFormValid = false;
+            return false;
+        }
+    });
+    $('#survey-form button[type=submit]').attr('disabled', !isFormValid)
+});
+</script>
+{% endblock %}
+
+{% block page_icon %}<img class="page-icon" src="{% static 'hci/img/survey.svg' %}">{% endblock %}
